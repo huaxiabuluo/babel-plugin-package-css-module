@@ -1,4 +1,4 @@
-# pkg-test
+# babel-plugin-package-css-module
 
 # Start
 ```
