@@ -1,0 +1,38 @@
+{
+  "printWidth": 120,
+  "tabWidth": 2,
+  "semi": true,
+  "singleQuote": true,
+  "bracketSpacing": true,
+  "jsxBracketSameLine": false,
+  "trailingComma": "all",
+  "overrides": [
+    {
+      "files": [
+        ".prettierrc",
+        ".babelrc",
+        ".eslintrc"
+      ],
+      "options": {
+        "parser": "json"
+      }
+    },
+    {
+      "files": "*.less",
+      "options": {
+        "parser": "less"
+      }
+    },
+    {
+      "files": [
+        "*.js",
+        ".jsx",
+        ".ts",
+        ".tsx"
+      ],
+      "options": {
+        "parser": "typescript"
+      }
+    }
+  ]
+}

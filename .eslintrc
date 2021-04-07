@@ -1,0 +1,38 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "rules": {
+    /** 函数类型可推断即可，返回声明非必须 */
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    /** 允许 any 类型 */
+    "@typescript-eslint/no-explicit-any": "off",
+    /** 允许空函数 */
+    "@typescript-eslint/no-empty-function": "off",
+    /** 允许 !!item 判断 */
+    "no-extra-boolean-cast": "off"
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "prettier/@typescript-eslint"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.js"
+      ],
+      "rules": {
+        /** js 文件中允许直接使用 commonjs 的 require 引入方式 */
+        "@typescript-eslint/no-var-requires": "off"
+      }
+    }
+  ]
+}
