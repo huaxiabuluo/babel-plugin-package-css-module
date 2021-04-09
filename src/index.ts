@@ -12,8 +12,8 @@ export default function() {
     visitor: {
       Program: {
         enter(_path: NodePath<t.Program>, { opts }: { opts: IOptions }) {
-          assert(!opts.entry, new Error('entry is empty'));
-          assert(!Array.isArray(opts.output), new Error(`output should be 'string[]', e.g: ['lib', 'es']`));
+          assert(!!opts.entry, new Error('entry is empty'));
+          assert(Array.isArray(opts.output), new Error(`output should be string[]. e.g: ['lib', 'es']`));
           compileLess(opts);
         },
         exit() {
