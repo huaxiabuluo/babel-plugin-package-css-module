@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-package-css-module",
-  "version": "0.1.0-beta.2",
+  "version": "0.1.0-beta.3",
   "description": "compile css module in npm package",
   "main": "lib/index.js",
   "unpkg": "dist/index.js",
