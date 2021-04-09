@@ -6,8 +6,9 @@ import assert from 'assert';
 import postCssModules from 'postcss-modules';
 import less from 'less';
 import mkdirp from 'mkdirp';
+import { IOptions } from './interface';
 
-export default function fileGenerator(sourcePath: string, output = ['es', 'lib']) {
+export default function fileGenerator({ entry: sourcePath, output, overrideBrowserslist }: IOptions) {
   const pathStat = fs.statSync(sourcePath);
 
   /** 编译处理后缀名为 .module.less 的文件 */
@@ -22,7 +23,7 @@ export default function fileGenerator(sourcePath: string, output = ['es', 'lib']
       const fileBuildPaths = output.map(folderName => sourcePath.replace('src', folderName).replace('.less', ''));
       postcss([
         /** autoprefixer: 浏览器兼容 */
-        autoprefixer({ overrideBrowserslist: ['> 1% in CN', 'last 2 versions', 'ios >= 9', 'Android >= 4.4'] }),
+        autoprefixer({ overrideBrowserslist }),
         /** 输出 json 文件 */
         postCssModules({
           getJSON: function(_cssFileName: string, json: Record<string, string>, _outputFileName: string) {
@@ -40,6 +41,6 @@ export default function fileGenerator(sourcePath: string, output = ['es', 'lib']
     /** 文件夹 */
   } else if (pathStat.isDirectory()) {
     const children = fs.readdirSync(sourcePath).map(name => path.join(sourcePath, name));
-    children.forEach(p => fileGenerator(p));
+    children.forEach(p => fileGenerator({ entry: p, output, overrideBrowserslist }));
   }
 }

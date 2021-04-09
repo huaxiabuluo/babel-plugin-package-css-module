@@ -1,7 +1,9 @@
 import * as t from '@babel/types';
 import { NodePath } from '@babel/traverse';
 import { addSideEffect } from '@babel/helper-module-imports';
+import assert from 'assert';
 import compileLess from './less-compile';
+import { IOptions } from './interface';
 
 export default function() {
   /** keep global `styles` Identifier */
@@ -9,8 +11,10 @@ export default function() {
   return {
     visitor: {
       Program: {
-        enter(_path: NodePath<t.Program>, { opts }: { opts: { entry: string; output: string[] } }) {
-          compileLess(opts.entry, opts.output);
+        enter(_path: NodePath<t.Program>, { opts }: { opts: IOptions }) {
+          assert(!opts.entry, new Error('entry is empty'));
+          assert(!Array.isArray(opts.output), new Error(`output should be 'string[]', e.g: ['lib', 'es']`));
+          compileLess(opts);
         },
         exit() {
           // stylesIdentifier = undefined;
