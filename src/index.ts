@@ -9,8 +9,8 @@ export default function() {
   return {
     visitor: {
       Program: {
-        enter(_path: NodePath<t.Program>, { opts }: { opts: { src: string; output: string[] } }) {
-          compileLess(opts.src, opts.output);
+        enter(_path: NodePath<t.Program>, { opts }: { opts: { entry: string; output: string[] } }) {
+          compileLess(opts.entry, opts.output);
         },
         exit() {
           // stylesIdentifier = undefined;
